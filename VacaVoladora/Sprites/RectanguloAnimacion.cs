@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+
+
+namespace VacaVoladora.Sprites
+{
+    public class RectanguloAnimacion : Vivo
+    {
+        protected List<Rectangle> rectangulos;
+        protected int selectedRectangle;
+
+        public RectanguloAnimacion()
+        {
+            rectangulos = new List<Rectangle>();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            Game1.TheGame.spriteBatch.Draw(Image, Rectangle, rectangulos[selectedRectangle], Color);
+        }
+    }
+}
