@@ -45,6 +45,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprites\Actualizable.cs" />
+    <Compile Include="Sprites\Bombas.cs" />
+    <Compile Include="Sprites\ColecccionBombas.cs" />
     <Compile Include="Sprites\ColeccionNubes.cs" />
     <Compile Include="Sprites\Fondo.cs" />
     <Compile Include="Sprites\Nubes.cs" />

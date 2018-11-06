@@ -19,5 +19,11 @@ namespace VacaVoladora.Sprites
         {
             Game1.TheGame.spriteBatch.Draw(Image, Rectangle, rectangulos[selectedRectangle], Color);
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
     }
+
 }

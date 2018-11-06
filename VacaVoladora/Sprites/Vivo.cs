@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace VacaVoladora.Sprites
 {
-    public class Vivo : Sprite
+    public abstract class Vivo : Sprite
     {
         public virtual int Health { get; set; }
         protected Texture2D vida;
@@ -29,11 +29,6 @@ namespace VacaVoladora.Sprites
                 vida.SetData(data);
                 Game1.TheGame.spriteBatch.Draw(vida, new Vector2(Rectangle.X, Rectangle.Y), Color.White);
             }
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
         }
     }
 }

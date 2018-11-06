@@ -64,7 +64,7 @@ namespace VacaVoladora
 
             sprites.Add(new Fondo());
             sprites.Add(new ColeccionNubes());
-
+            sprites.Add(new ColecccionBombas());
             sprites.Add(new Vaca());
         }
 

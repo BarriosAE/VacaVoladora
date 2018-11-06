@@ -18,14 +18,14 @@ namespace VacaVoladora.Sprites
                 random.Next(Game1.TheGame.GraphicsDevice.Viewport.Height - 80),
                 80, 80);
             Color = Color.White;
-            time = random.Next(1, 2);
+            time = random.Next(1, 3);
         }
         public override void Draw(GameTime gameTime)
         {
-            if (time == 1)
+            if (time <= 1)
             {
                 Game1.TheGame.spriteBatch.Draw(Image, Rectangle, Color);
-                time = random.Next(1, 2);
+                time = random.Next(0, 2);
             }
             else
             {

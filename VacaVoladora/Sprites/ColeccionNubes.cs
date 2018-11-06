@@ -14,17 +14,16 @@ namespace VacaVoladora.Sprites
         {
             if (random == null)
                 random = new Random();
-            time = random.Next(300, 700);
+            time = random.Next(0, 150);
         }
 
         public void Update(GameTime gameTime)
         {
-            //if (Game1.TheGame.sprites.Count < 7)
             if (gameTime.TotalGameTime.Subtract(nubetime).Milliseconds >=time)
             {
                 nubetime = gameTime.TotalGameTime;
                 Game1.TheGame.Actualizaciones.Add(new Nubes());
-                time = random.Next(400, 800);
+                time = random.Next(600, 900);
             }
         }
     }
