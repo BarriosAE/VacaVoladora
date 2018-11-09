@@ -151,3 +151,9 @@
 /processorParam:TextureFormat=Color
 /build:Images/explosion.png
 
+#begin Audio/Laser.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/Laser.wav
+

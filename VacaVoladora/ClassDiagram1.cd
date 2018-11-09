@@ -3,7 +3,7 @@
   <Class Name="VacaVoladora.Sprites.ColeccionNubes" Collapsed="true">
     <Position X="11.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAUBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>Sprites\ColeccionNubes.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -18,14 +18,14 @@
   <Class Name="VacaVoladora.Sprites.Nubes" Collapsed="true">
     <Position X="4.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQBAAAAAAAAAgAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Sprites\Nubes.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VacaVoladora.Sprites.RectanguloAnimacion" Collapsed="true">
     <Position X="6.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgQAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgQAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Sprites\RectanguloAnimacion.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -47,8 +47,15 @@
   <Class Name="VacaVoladora.Sprites.Vivo" Collapsed="true">
     <Position X="6.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAEA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAQAAAAEAAAAAAAEA=</HashCode>
       <FileName>Sprites\Vivo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VacaVoladora.Sprites.Bombas" Collapsed="true">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Sprites\Bombas.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="VacaVoladora.Sprites.Actualizable" Collapsed="true">

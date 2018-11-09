@@ -18,7 +18,7 @@ namespace VacaVoladora.Sprites
             Rectangle = new Rectangle(Game1.TheGame.GraphicsDevice.Viewport.Width,
     random.Next(Game1.TheGame.GraphicsDevice.Viewport.Height - 80),
     50, 50);
-            Health = 100;
+            Vida = 100;
             var w = Image.Width / 2;
             for (int i = 0; i < 2; i++)
             {
@@ -65,6 +65,13 @@ namespace VacaVoladora.Sprites
                         LaVaca = item as Vaca;
                         break;
                     }
+                }             foreach (var item in Game1.TheGame.sprites)
+                {
+                    if (item is Vaca)
+                    {
+                        LaVaca = item as Vaca;
+                        break;
+                    }
                 }
                 if (LaVaca == null)
                 {
@@ -72,14 +79,20 @@ namespace VacaVoladora.Sprites
                 }
                 if (Rectangle.Intersects(LaVaca.Rectangle))
                 {
-                    LaVaca.Health -= 10;
+                    Explosion explosion = new Explosion(Rectangle.Location.X, Rectangle.Location.Y);
+                    LaVaca.Vida -= 20;
+                    LaVaca.estado = 1;
+                    Game1.TheGame.Actualizaciones.Add(this);
+                    Game1.TheGame.Actualizaciones.Add(explosion);
                 }
             }
             #endregion
 
-            if (Health <= 0)
+            if (Vida <= 0)
             {
+                Explosion explosion = new Explosion(Rectangle.Location.X, Rectangle.Location.Y);
                 Game1.TheGame.Actualizaciones.Add(this);
+                Game1.TheGame.Actualizaciones.Add(explosion);
             }
 
 

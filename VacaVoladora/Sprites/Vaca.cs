@@ -11,11 +11,22 @@ namespace VacaVoladora.Sprites
 {
     public class Vaca : RectanguloAnimacion
     {
+        public enum Estados
+        {
+            Volando, Daño, Muerte, Destruir
+        }
+        public int estado = (int)Estados.Volando;
+
+        TimeSpan lasttime,  frametime;
+
+        public int Score { get; internal set; }
+
         public Vaca()
+        
         {
             Image = Game1.TheGame.Content.Load<Texture2D>("Images/Vacas");
             Rectangle = new Rectangle(50, 50, 80, 80);
-            Health = 100;
+            Vida = 100;
             var w = Image.Width / 5;
             for (int i = 0; i < 5; i++)
             {
@@ -27,86 +38,95 @@ namespace VacaVoladora.Sprites
             selectedRectangle = 3;
         }
 
-        TimeSpan lasttime, powertime, frametime;
-        bool power;
-        int danio;
-        Rectangle rectBack;
-
-        public int Score { get; internal set; }
-
         public override void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.Subtract(frametime).Milliseconds > 200)
-            {
-                frametime = gameTime.TotalGameTime;
-                selectedRectangle++;
-                if (selectedRectangle > 4)
-                    selectedRectangle = 3;
-            }
-
-
-            #region Coordenadas
             int x, y;
             x = Rectangle.X;
             y = Rectangle.Y;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                x -= 5;    
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                x += 5;    
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                y -= 5;    
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            if (estado == (int)Estados.Volando)
+            {
+                if (gameTime.TotalGameTime.Subtract(frametime).Milliseconds > 250)
+                {
+                    frametime = gameTime.TotalGameTime;
+                    selectedRectangle++;
+                    if (selectedRectangle > 4)
+                        selectedRectangle = 3;
+                }
+            }
+            if (estado == (int)Estados.Daño)
+            {
+                selectedRectangle = 0;
+                estado = (int)Estados.Volando;
+
+            }
+            if (Vida <= 0)
+            {
+                estado = (int)Estados.Muerte;
+                frametime = gameTime.TotalGameTime;
+                selectedRectangle++;
+                if (selectedRectangle > 2)
+                    selectedRectangle = 0;
                 y += 5;
+                
+                if (estado != (int)Estados.Destruir) 
+                  Game1.TheGame.Actualizaciones.Add(this);
+            }
+            #region Coordenadas
+            if (estado == (int)Estados.Volando)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                    x -= 5;
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                    x += 5;
+                if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                    y -= 5;
+                if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                    y += 5;
 
-            if (x > Game1.TheGame.GraphicsDevice.Viewport.Width - Rectangle.Width)
-                x = Game1.TheGame.GraphicsDevice.Viewport.Width - Rectangle.Width;
-            else if (x < 0)
-                x = 0;
+                if (x > Game1.TheGame.GraphicsDevice.Viewport.Width - Rectangle.Width)
+                    x = Game1.TheGame.GraphicsDevice.Viewport.Width - Rectangle.Width;
+                else if (x < 0)
+                    x = 0;
 
-            if (y > Game1.TheGame.GraphicsDevice.Viewport.Height - Rectangle.Height)
-                y = Game1.TheGame.GraphicsDevice.Viewport.Height - Rectangle.Height;
-            else if (y < 0)
-                y = 0;
+                if (y > Game1.TheGame.GraphicsDevice.Viewport.Height - Rectangle.Height)
+                    y = Game1.TheGame.GraphicsDevice.Viewport.Height - Rectangle.Height;
+                else if (y < 0)
+                    y = 0;
 
+                #endregion
 
+                if (
+                    Keyboard.GetState().IsKeyDown(Keys.Space) &&
+                    gameTime.TotalGameTime.Subtract(lasttime).Milliseconds > 300
+                    )
+                {
+                    lasttime = gameTime.TotalGameTime;
+                    Misil misil = new Misil(this, (Rectangle.X + Rectangle.Width) - 10, Rectangle.Y + 15);
+                    Game1.TheGame.Actualizaciones.Add(misil);
+
+                }
+            }
             Rectangle = new Rectangle(x, y,
-                                        Rectangle.Width,
-                                        Rectangle.Height);
-            #endregion
+                            Rectangle.Width,
+                            Rectangle.Height);
+        }
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
 
-            if (power)
+            Game1.TheGame.spriteBatch.DrawString(
+                Game1.TheGame.Fonts[Game1.Fuentes.Estadisticas],"Puntaje:"+Score.ToString(), new Vector2(20, 20), Color.White);
+            if (Vida <= 0)
             {
-                danio = gameTime.TotalGameTime.Subtract(powertime).Seconds;
-                Rectangle = new Rectangle(Rectangle.X,
-                                        Rectangle.Y,
-                                        (int)(rectBack.Width * (1.0f + (float)danio / 4)),
-                                        (int)(rectBack.Height * (1.0f + (float)danio / 4))
-                                            );
-            }
-
-            if (Keyboard.GetState().IsKeyUp(Keys.C) && power)
-            {
-                power = false;
-                Rectangle = rectBack;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.C) && !power)
-            {
-                power = true;
-                powertime = gameTime.TotalGameTime;
-                rectBack = Rectangle;
-            }
-
-            if (
-                Keyboard.GetState().IsKeyDown(Keys.Space) &&
-                gameTime.TotalGameTime.Subtract(lasttime).Milliseconds > 300
-                )
-            {
-                lasttime = gameTime.TotalGameTime;
-
+                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Fuentes.Estadisticas],"GAME OVER",new Vector2(20, 250),
+                                                     Color.AntiqueWhite);
+                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Fuentes.Estadisticas],
+                                                     "Presione enter para reiniciar",
+                                                     new Vector2(40, 300),
+                                                     Color.Yellow);
+                Game1.TheGame.IsGameOver = true;
             }
         }
     }
-
 }
 

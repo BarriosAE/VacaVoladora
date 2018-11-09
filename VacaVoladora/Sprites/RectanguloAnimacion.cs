@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace VacaVoladora.Sprites
 {
-    public class RectanguloAnimacion : Vivo
+    public abstract class RectanguloAnimacion : Vivo
     {
         protected List<Rectangle> rectangulos;
         protected int selectedRectangle;
@@ -17,13 +17,10 @@ namespace VacaVoladora.Sprites
 
         public override void Draw(GameTime gameTime)
         {
+            base.DrawVida(gameTime);
             Game1.TheGame.spriteBatch.Draw(Image, Rectangle, rectangulos[selectedRectangle], Color);
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -7,22 +6,22 @@ namespace VacaVoladora.Sprites
 {
     public abstract class Vivo : Sprite
     {
-        public virtual int Health { get; set; }
+        public virtual int Vida { get; set; }
         protected Texture2D vida;
 
         public override void Draw(GameTime gameTime)
         {
-            DrawHealth(gameTime);
+            DrawVida(gameTime);
 
             base.Draw(gameTime);
         }
 
-        protected void DrawHealth(GameTime gameTime)
+        protected void DrawVida(GameTime gameTime)
         {
-            if (Health > 0)
+            if (Vida > 0)
             {
-                vida = new Texture2D(Game1.TheGame.GraphicsDevice, Health, 20);
-                Color[] data = new Color[Health * 20];
+                vida = new Texture2D(Game1.TheGame.GraphicsDevice, Vida, 20);
+                Color[] data = new Color[Vida * 20];
                 for (int i = 0; i < data.Length; i++)
                     data[i] = Color.LightGreen;
 

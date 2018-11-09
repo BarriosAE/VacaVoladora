@@ -48,7 +48,9 @@
     <Compile Include="Sprites\Bombas.cs" />
     <Compile Include="Sprites\ColecccionBombas.cs" />
     <Compile Include="Sprites\ColeccionNubes.cs" />
+    <Compile Include="Sprites\Explosion.cs" />
     <Compile Include="Sprites\Fondo.cs" />
+    <Compile Include="Sprites\Misil.cs" />
     <Compile Include="Sprites\Nubes.cs" />
     <Compile Include="Sprites\RectanguloAnimacion.cs" />
     <Compile Include="Sprites\Sprite.cs" />
@@ -66,6 +68,7 @@
     <Content Include="Content\Audio\explosionS.wav" />
     <Content Include="Content\Audio\golpeS.wav" />
     <Content Include="Content\Audio\gritoS.wav" />
+    <Content Include="Content\Audio\Laser.wav" />
     <Content Include="Content\Audio\musicaS.mp3" />
     <Content Include="Content\Audio\raymanS.wav" />
     <Content Include="Content\Audio\saltar1.wav" />

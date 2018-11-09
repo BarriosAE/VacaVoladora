@@ -25,7 +25,7 @@ namespace VacaVoladora.Sprites
             {
                 bombatime = gameTime.TotalGameTime;
                 Game1.TheGame.Actualizaciones.Add(new Bombas());
-                time = random.Next(3, 6);
+                time = random.Next(2, 5);
             }
         }
     }

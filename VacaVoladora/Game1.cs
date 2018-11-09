@@ -17,15 +17,20 @@ namespace VacaVoladora
         {
             Estadisticas, BigFont
         }
+        public enum Sonidos
+        {
+            Explosion, Disparo
+        }
         public Dictionary<Fuentes, SpriteFont> Fonts { get; private set; }
         internal GraphicsDeviceManager graphics { get; private set; }
         internal SpriteBatch spriteBatch { get; private set; }
         internal static Game1 TheGame { get; private set; }
         internal List<Actualizable> sprites { get; private set; }
         internal List<Sprite> Actualizaciones { get; private set; }
+        public Dictionary<Sonidos, SoundEffect> Sounds { get; private set; }
+        public bool IsGameOver { get; internal set; } = false;
 
-
-
+        Song miCancion;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -57,6 +62,14 @@ namespace VacaVoladora
             Fonts = new Dictionary<Fuentes, SpriteFont>();
             Actualizaciones = new List<Sprite>();
             sprites = new List<Actualizable>();
+            Sounds = new Dictionary<Sonidos, SoundEffect>();
+
+            miCancion = Content.Load<Song>("Audio/musicaS");
+
+            Sounds.Add(Sonidos.Explosion,
+                        Content.Load<SoundEffect>("Audio/explosionS"));
+            Sounds.Add(Sonidos.Disparo,
+                         Content.Load<SoundEffect>("Audio/Laser"));
             Fonts.Add(Fuentes.BigFont,
             Content.Load<SpriteFont>("Fonts/BigFont"));
             Fonts.Add(Fuentes.Estadisticas,
@@ -82,25 +95,50 @@ namespace VacaVoladora
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+
+        bool firstRun = true;
         protected override void Update(GameTime gameTime)
         {
+            if (firstRun)
+            {
+               MediaPlayer.Play(miCancion);
+                firstRun = false;
+            }
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-            foreach (var item in sprites)
+            if (!IsGameOver)
             {
-                item.Update(gameTime);
+                // TODO: Add your update logic here
+                foreach (var item in sprites)
+                {
+                    item.Update(gameTime);
+                }
+                foreach (var item in Actualizaciones)
+                {
+                    if (sprites.Contains(item))
+                        sprites.Remove(item);
+                    else
+                        sprites.Add(item);
+                }
+                Actualizaciones.Clear();
+                base.Update(gameTime);
             }
-            foreach (var item in Actualizaciones)
+            else if (IsGameOver)
             {
-                if (sprites.Contains(item))
-                    sprites.Remove(item);
-                else
-                    sprites.Add(item);
+                   foreach (var item in Game1.TheGame.sprites)
+                {
+                    if (item is Vaca)
+                    {
+                        item.Update(gameTime);
+                        break;
+                    }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    IsGameOver = false;
+                    LoadContent();
+                }
             }
-            Actualizaciones.Clear();
-            base.Update(gameTime);
         }
 
         /// <summary>
