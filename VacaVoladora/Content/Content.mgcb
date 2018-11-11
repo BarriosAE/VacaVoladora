@@ -157,3 +157,10 @@
 /processorParam:Quality=Best
 /build:Audio/Laser.wav
 
+#begin Fonts/Verdana
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Verdana
+

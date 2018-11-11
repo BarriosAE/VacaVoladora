@@ -26,7 +26,7 @@ namespace VacaVoladora.Sprites
         {
             Image = Game1.TheGame.Content.Load<Texture2D>("Images/Vacas");
             Rectangle = new Rectangle(50, 50, 80, 80);
-            Vida = 100;
+            Vida = 30;
             var w = Image.Width / 5;
             for (int i = 0; i < 5; i++)
             {
@@ -118,9 +118,9 @@ namespace VacaVoladora.Sprites
                 Game1.TheGame.Fonts[Game1.Fuentes.Estadisticas],"Puntaje:"+Score.ToString(), new Vector2(20, 20), Color.White);
             if (Vida <= 0)
             {
-                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Fuentes.Estadisticas],"GAME OVER",new Vector2(20, 250),
+                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Fuentes.BigFont],"GAME OVER",new Vector2(50, 150),
                                                      Color.AntiqueWhite);
-                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Fuentes.Estadisticas],
+                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Fuentes.Verdana],
                                                      "Presione enter para reiniciar",
                                                      new Vector2(40, 300),
                                                      Color.Yellow);

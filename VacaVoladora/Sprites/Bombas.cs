@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -30,7 +31,7 @@ namespace VacaVoladora.Sprites
         TimeSpan lasttime, frametime;
         public override void Update(GameTime gameTime)
         {
-              if (gameTime.TotalGameTime.Subtract(frametime).Milliseconds > 200)
+            if (gameTime.TotalGameTime.Subtract(frametime).Milliseconds > 200)
             {
                 frametime = gameTime.TotalGameTime;
                 selectedRectangle++;
@@ -40,6 +41,7 @@ namespace VacaVoladora.Sprites
             #region coordenadas
 
             int x = Rectangle.X;
+            
             x -= 2;
 
             Rectangle = new Rectangle(x, Rectangle.Y,
@@ -79,12 +81,17 @@ namespace VacaVoladora.Sprites
                 }
                 if (Rectangle.Intersects(LaVaca.Rectangle))
                 {
+                    SoundEffect sonido = Game1.TheGame.Sounds[Game1.Sonidos.Grito];
+                    sonido.CreateInstance();
+                    sonido.Play();
                     Explosion explosion = new Explosion(Rectangle.Location.X, Rectangle.Location.Y);
                     LaVaca.Vida -= 20;
                     LaVaca.estado = 1;
                     Game1.TheGame.Actualizaciones.Add(this);
                     Game1.TheGame.Actualizaciones.Add(explosion);
                 }
+          
+                
             }
             #endregion
 

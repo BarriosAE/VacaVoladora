@@ -15,11 +15,11 @@ namespace VacaVoladora
     {
         public enum Fuentes
         {
-            Estadisticas, BigFont
+            Estadisticas, BigFont, Verdana
         }
         public enum Sonidos
         {
-            Explosion, Disparo
+            Explosion, Disparo,Grito
         }
         public Dictionary<Fuentes, SpriteFont> Fonts { get; private set; }
         internal GraphicsDeviceManager graphics { get; private set; }
@@ -68,17 +68,22 @@ namespace VacaVoladora
 
             Sounds.Add(Sonidos.Explosion,
                         Content.Load<SoundEffect>("Audio/explosionS"));
+            Sounds.Add(Sonidos.Grito,
+                        Content.Load<SoundEffect>("Audio/gritoS"));
             Sounds.Add(Sonidos.Disparo,
                          Content.Load<SoundEffect>("Audio/Laser"));
             Fonts.Add(Fuentes.BigFont,
             Content.Load<SpriteFont>("Fonts/BigFont"));
             Fonts.Add(Fuentes.Estadisticas,
                         Content.Load<SpriteFont>("Fonts/Stats"));
+            Fonts.Add(Fuentes.Verdana,
+             Content.Load<SpriteFont>("Fonts/Verdana"));
 
             sprites.Add(new Fondo());
+            sprites.Add(new Vaca());
             sprites.Add(new ColeccionNubes());
             sprites.Add(new ColecccionBombas());
-            sprites.Add(new Vaca());
+            
         }
 
         /// <summary>

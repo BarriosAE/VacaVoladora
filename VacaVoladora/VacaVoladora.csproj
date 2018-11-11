@@ -90,6 +90,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="Content\Fonts\BigFont.xnb" />
     <None Include="Content\Fonts\Stats.xnb" />
+    <None Include="Content\Fonts\visitor1.ttf" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
